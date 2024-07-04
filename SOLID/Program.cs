@@ -42,6 +42,21 @@ Console.WriteLine("----------------------------------");
 Console.WriteLine();
 Console.WriteLine("Liskov Substitution Principle (Liskov Yerine Geçme Prensibi) ");
 Console.WriteLine();
+
+
+PaymentMethod paymentMethod = new PayPalPayment { Email = "example@domain.com" };
+ShoppingCart cart = new ShoppingCart(paymentMethod);
+cart.Checkout(100);
+
+// Çıkış: Processing PayPal payment of $100.00.
+
+paymentMethod = new CreditCardPayment { CardNumber = "1234-5678-9876-5432", ExpiryDate = "12/25" };
+cart = new ShoppingCart(paymentMethod);
+cart.Checkout(150);
+
+// Çıkış: Processing credit card payment of $150.00.
+
+
 List<IBird> birds = new List<IBird>
         {
             new Sparrow(),
